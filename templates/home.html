@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trello Clone</title>
+</head>
+<body>
+    <h1>Home page!</h1>
+    {% if request.user.is_authenticated %}
+        You are already logged in, if you want to log out, click -
+        <a href="{% url 'account_logout' %}"> Log out</a>
+    {% else %}
+        You are not yet logged in, if you want to log in, click here -
+        <a href="{% url 'account_login' %}"> Log in</a>
+    {% endif %}
+</body>
+</html>
