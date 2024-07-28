@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.google',
 
     'rest_framework',
     'rest_framework_simplejwt',
@@ -151,6 +152,16 @@ SOCIALACCOUNT_PROVIDERS = {
             'secret': '1fe37975248497271e15be6dc49bf13c6f102e52',
             'key': ''
         }
+    },
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'OAUTH_PKCE_ENABLED': True,
     }
 }
 
