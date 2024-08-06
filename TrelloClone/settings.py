@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework.authtoken',
     'dj_rest_auth',
-    'users',
+    'user_auth',
     'social_django',
     'corsheaders',
 
@@ -154,7 +154,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'users.CustomUser'
+AUTH_USER_MODEL = 'user_auth.CustomUser'
 
 SOCIALACCOUNT_PROVIDERS = {
     'github': {
