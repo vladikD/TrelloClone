@@ -15,25 +15,25 @@ class RegisterSerializer(serializers.Serializer):
 
     def validate_username(self, username):
         if User.objects.filter(username=username).exists():
-            raise serializers.ValidationError("Username вже використовується.")
+            raise serializers.ValidationError("Username is already in use.")
 
         if not re.match("^[a-zA-Z0-9_]+$", username):
-            raise serializers.ValidationError("Username може містити лише букви, цифри і символи _.")
+            raise serializers.ValidationError("Username can contain only letters, numbers, and _.")
 
         return username
 
     def validate_email(self, email):
         if User.objects.filter(email=email).exists():
-            raise serializers.ValidationError("Email вже використовується.")
+            raise serializers.ValidationError("Email is already in use.")
         return email
 
     def validate_password(self, password):
         if len(password) < 8:
-            raise serializers.ValidationError("Пароль повинен містити щонайменше 8 символів.")
+            raise serializers.ValidationError("The password must be at least 8 characters long.")
         if not re.search(r'\d', password):
-            raise serializers.ValidationError("Пароль повинен містити хоча б одну цифру.")
+            raise serializers.ValidationError("The password must contain at least one digit.")
         if not re.search(r'[A-Z]', password):
-            raise serializers.ValidationError("Пароль повинен містити хоча б одну велику літеру.")
+            raise serializers.ValidationError("The password must contain at least one capital letter.")
         return password
 
     def save(self, request):
