@@ -12,6 +12,7 @@ class RegisterSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=150)
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
+    password_confirm = serializers.CharField(write_only=True)
 
     def validate_username(self, username):
         if User.objects.filter(username=username).exists():
@@ -35,6 +36,18 @@ class RegisterSerializer(serializers.Serializer):
         if not re.search(r'[A-Z]', password):
             raise serializers.ValidationError("The password must contain at least one capital letter.")
         return password
+
+
+    def validate(self, data):
+        # Перевірка, чи паролі співпадають
+        password = data.get('password')
+        password_confirm = data.get('password_confirm')
+
+        if password != password_confirm:
+            raise serializers.ValidationError("Passwords do not match.")
+
+        return data
+
 
     def save(self, request):
         adapter = get_adapter()
